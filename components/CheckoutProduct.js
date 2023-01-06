@@ -1,6 +1,6 @@
 import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/legacy/image";
-import Currency from "react-currency-formatter";
+import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
 import { addToBasket, removeFromBasket } from "../slices/BasketSlice";
 import primeTag from "../public/images/prime-tag.png";
@@ -56,7 +56,7 @@ function CheckoutProduct({
         </div>
 
         <p className="text xs my-2 line-clamp-2">{description}</p>
-        <Currency quantity={price} currency="USD" />
+        <CurrencyFormat value={price} prefix={"$"} />
 
         {hasPrime && (
           <div className=" flex items-center space-x-2">
