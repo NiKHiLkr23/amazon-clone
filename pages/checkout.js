@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { selectItems, selectTotal } from "../slices/BasketSlice";
 import CheckoutProduct from "../components/CheckoutProduct";
-import CurrencyFormat from "react-currency-format";
 import { useSession } from "next-auth/react";
 import Primedaybanner from "../public/images/Prime-day-banner.png";
 
@@ -51,9 +50,7 @@ function Checkout() {
             <>
               <h2 className="whitespace-nowrap ">
                 Subtotal ({items.length} items):{" "}
-                <span className="font-bold">
-                  <CurrencyFormat value={total} prefix={"$"} />
-                </span>{" "}
+                <span className="font-bold">${total}</span>{" "}
               </h2>
               <button
                 disabled={!session}

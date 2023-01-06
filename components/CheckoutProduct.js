@@ -1,6 +1,5 @@
 import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/legacy/image";
-import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
 import { addToBasket, removeFromBasket } from "../slices/BasketSlice";
 import primeTag from "../public/images/prime-tag.png";
@@ -54,10 +53,7 @@ function CheckoutProduct({
               <StarIcon key={i} className=" h-5 text-yellow-500" />
             ))}
         </div>
-
-        <p className="text xs my-2 line-clamp-2">{description}</p>
-        <CurrencyFormat value={price} prefix={"$"} />
-
+        <p className="text xs my-2 line-clamp-2">{description}</p>${price}
         {hasPrime && (
           <div className=" flex items-center space-x-2">
             <Image
