@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/legacy/image";
 import { useDispatch } from "react-redux";
 import { addToBasket, removeFromBasket } from "../slices/BasketSlice";
-import primeTag from "../public/images/prime-tag.png";
+import primeTag from "../public/images/Prime-tag.png";
 function CheckoutProduct({
   id,
   title,

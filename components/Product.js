@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addToBasket } from "../slices/BasketSlice";
 import { useState } from "react";
 
-import primeTag from "../public/images/prime-tag.png";
+import primeTag from "../public/images/Prime-tag.png";
 
 function Product({ id, title, price, description, category, image, rating }) {
   const [hasPrime] = useState(true);
