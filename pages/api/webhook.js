@@ -32,7 +32,7 @@ const fullfillOrder = async (session) => {
       console.log(`SUCCESS: Order ${session.id} had been added to the DB`);
     });
 };
-export default async (req, res) => {
+const webhook = async (req, res) => {
   if (req.method === "POST") {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
@@ -61,6 +61,8 @@ export default async (req, res) => {
     }
   }
 };
+
+export default webhook;
 
 export const config = {
   api: {

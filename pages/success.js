@@ -2,7 +2,7 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import Header from "../components/Header";
 import { useRouter } from "next/router";
 
-function success() {
+function Success() {
   const router = useRouter();
   return (
     <div className="bg-gray-200 h-screen">
@@ -16,7 +16,7 @@ function success() {
             </h1>
           </div>
           <p>
-            Thankyou for shopping with us. We'll send you a confirmation once
+            Thankyou for shopping with us. We will send you a confirmation once
             your item has been shipped. If you would like to check the status of
             your order(s) please press the link below.
           </p>
@@ -32,4 +32,4 @@ function success() {
   );
 }
 
-export default success;
+export default Success;

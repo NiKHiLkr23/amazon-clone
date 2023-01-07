@@ -1,4 +1,5 @@
 import moment from "moment";
+import Image from "next/legacy/image";
 
 function Order({ id, amount, amountShipping, items, timestamp, images }) {
   return (
@@ -27,11 +28,13 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
       <div className="p-5 sm:p-10 ">
         <div className="flex space-x-6 overflow-x-auto">
           {images.map((image) => (
-            <img
+            <Image
               key={image}
               src={image}
+              width={200}
+              height={200}
               alt=""
-              className="h-20 object-contain sm:h-32"
+              objectFit="contain"
             />
           ))}
         </div>
