@@ -1,15 +1,39 @@
 import Image from "next/legacy/image";
+import Primedaybanner from "../public/images/Prime-day-banner.png";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { selectItems, selectTotal } from "../slices/BasketSlice";
 import CheckoutProduct from "../components/CheckoutProduct";
 import { useSession } from "next-auth/react";
-import Primedaybanner from "../public/images/Prime-day-banner.png";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+import { getSession } from "next-auth/react";
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 function Checkout() {
   const items = useSelector(selectItems);
   const { data: session } = useSession();
   const total = useSelector(selectTotal);
+  const createCheckoutSession = async () => {
+    const stripe = await stripePromise;
+
+    // call the backend to create checkout session...
+    const checkoutSession = await axios.post("/api/checkout_sessions", {
+      items: items,
+      email: session.user.email,
+    });
+
+    //REdirect user/customer to Stripe Checkout
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result.error) console.log(result.error.message);
+  };
+
   return (
     <div>
       <Header />
@@ -53,6 +77,8 @@ function Checkout() {
                 <span className="font-bold">${total}</span>{" "}
               </h2>
               <button
+                role="link"
+                onClick={createCheckoutSession}
                 disabled={!session}
                 className={`mt-2 ${
                   !session
@@ -71,3 +97,11 @@ function Checkout() {
 }
 
 export default Checkout;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: { session },
+  };
+}
